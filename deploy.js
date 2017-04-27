@@ -1,19 +1,19 @@
 var http = require('http')
   , exec = require('child_process').exec;
 
-const PORT = 1234
-  , PATH = './';
+const PORT = 80
+  , PATH = './webhook';
 
 var deployServer = http.createServer(function(request, response) {
   console.log(request.url)
   if (request.url.search(/deploy\/?$/i) > 0) {
 
-    // var commands = [
-    //   // 'cd ' + PATH,
-    //   'git pull'
-    // ].join(' && ')
+    var commands = [
+      'cd ' + PATH,
+      'git pull'
+    ].join(' && ')
 
-    commands = 'git pull';
+    // commands = 'git pull';
 
     exec(commands, function(err, out, code) {
       if (err) {
